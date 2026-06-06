@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#1a1a2e" rx="12"/>
+  <!-- Left curly brace { -->
+  <path d="M20 10 C12 10 10 15 10 22 C10 27 14 29 14 32 C14 35 10 37 10 42 C10 49 12 54 20 54"
+        fill="none" stroke="#ff6b35" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right curly brace } -->
+  <path d="M44 10 C52 10 54 15 54 22 C54 27 50 29 50 32 C50 35 54 37 54 42 C54 49 52 54 44 54"
+        fill="none" stroke="#ff6b35" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Left square bracket [ -->
+  <line x1="27" y1="20" x2="27" y2="44" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="27" y1="20" x2="31" y2="20" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="27" y1="44" x2="31" y2="44" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right square bracket ] -->
+  <line x1="37" y1="20" x2="37" y2="44" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="20" x2="37" y2="20" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="33" y1="44" x2="37" y2="44" stroke="#d2a8ff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Indentation / tree lines (formatted JSON visual) -->
+  <line x1="28" y1="28" x2="36" y2="28" stroke="#3fb950" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="28" y1="36" x2="32" y2="36" stroke="#3fb950" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Comma dot after first value -->
+  <circle cx="33" cy="36" r="1.2" fill="#3fb950"/>
+</svg>
