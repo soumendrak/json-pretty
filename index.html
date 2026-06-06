@@ -10,13 +10,11 @@
   :root{--bg:#0d1117;--surface:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--accent:#f0883e;--accent-dim:#c96d2e;--accent-glow:rgba(240,136,62,.25);--success:#3fb950;--error:#f85149;--radius:8px;--font-mono:'Cascadia Code','Fira Code','JetBrains Mono','Menlo','Consolas',monospace;--font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
   html{font-size:15px}
   body{background:var(--bg);color:var(--text);font-family:var(--font-sans);min-height:100vh;display:flex;flex-direction:column}
-  /* scrollbar */
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:transparent}
   ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
   ::-webkit-scrollbar-thumb:hover{background:var(--muted)}
 
-  /* HEADER */
   header{display:flex;align-items:center;gap:12px;padding:18px 24px 12px;border-bottom:1px solid var(--border);flex-wrap:wrap}
   header h1{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
   header h1 .brace{color:var(--accent)}
@@ -24,7 +22,6 @@
   header .sub{color:var(--muted);font-size:.82rem;margin-left:auto}
   .badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--accent);color:#fff;text-transform:uppercase;letter-spacing:.04em}
 
-  /* LAYOUT */
   .app{flex:1;display:flex;gap:0;padding:0;max-width:1400px;width:100%;margin:0 auto}
   @media(min-width:900px){.app{flex-direction:row;padding:16px 20px;gap:16px}}
   @media(max-width:899px){.app{flex-direction:column;padding:12px 14px;gap:12px}}
@@ -34,12 +31,10 @@
   .panel-head label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:flex;align-items:center;gap:6px}
   .panel-head .count{font-size:.7rem;color:var(--muted);font-family:var(--font-mono);background:rgba(255,255,255,.04);padding:1px 8px;border-radius:4px}
 
-  /* TEXTAREA */
   #input{flex:1;resize:none;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font-mono);font-size:.82rem;line-height:1.55;padding:14px;tab-size:2;min-height:200px}
   #input::placeholder{color:var(--muted);opacity:.5}
   #input.drag-over{background:rgba(240,136,62,.08)}
 
-  /* OUTPUT */
   .output-wrap{flex:1;position:relative;overflow:auto}
   #output{display:none;font-family:var(--font-mono);font-size:.82rem;line-height:1.55;padding:14px;white-space:pre-wrap;word-break:break-word;tab-size:2;overflow:auto;min-height:200px}
   #output.show{display:block}
@@ -50,7 +45,6 @@
   #placeholder p{font-size:.85rem;max-width:280px;line-height:1.5}
   #placeholder.hide{display:none}
 
-  /* syntax highlighting */
   .json-key{color:#ffa657}
   .json-string{color:#a5d6ff}
   .json-number{color:#79c0ff}
@@ -60,7 +54,22 @@
   .json-comma{color:var(--muted)}
   .json-colon{color:var(--muted)}
 
-  /* TREE VIEW */
+  /* JSONPath indicator */
+  .jsonpath-bar{display:none;flex-shrink:0;padding:8px 14px;background:rgba(240,136,62,.08);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:.78rem;color:var(--accent);gap:8px;align-items:center;cursor:pointer;user-select:none}
+  .jsonpath-bar.show{display:flex}
+  .jsonpath-bar .jp-label{color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.04em}
+  .jsonpath-bar .jp-path{flex:1;word-break:break-all}
+  .jsonpath-bar .jp-clear{color:var(--muted);font-size:.8rem;cursor:pointer;flex-shrink:0}
+  .jsonpath-bar .jp-clear:hover{color:var(--text)}
+
+  /* Tree search */
+  .tree-search-wrap{display:none;padding:8px 14px;border-bottom:1px solid var(--border)}
+  .tree-search-wrap.show{display:block}
+  .tree-search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 10px;color:var(--text);font-family:var(--font-mono);font-size:.78rem;outline:none}
+  .tree-search-wrap input:focus{border-color:var(--accent)}
+  .tree-search-wrap input::placeholder{color:var(--muted);opacity:.5}
+
+  /* Tree view */
   .tree-wrap{display:none;flex:1;overflow:auto;padding:12px 14px;font-family:var(--font-mono);font-size:.82rem;line-height:1.7;min-height:160px}
   .tree-wrap.show{display:block}
   .tree-toggle{cursor:pointer;user-select:none;display:inline-flex;align-items:center;gap:1px;color:var(--muted);font-size:.65rem;width:1.4em;flex-shrink:0}
@@ -83,6 +92,11 @@
   .tree-leaf>.tree-line>.tree-toggle{visibility:hidden}
   .tree-children{margin-left:0}
 
+  /* Tree search highlight */
+  .tree-highlight{background:rgba(240,136,62,.2);border-radius:2px;padding:0 2px}
+  .tree-hidden{display:none !important}
+  .tree-match>.tree-line>.kv{background:rgba(240,136,62,.15);border-radius:3px;padding:0 2px}
+
   /* BUTTONS */
   .toolbar{display:flex;gap:6px;padding:10px 14px;border-top:1px solid var(--border);flex-wrap:wrap;align-items:center}
   .toolbar .spacer{flex:1}
@@ -97,15 +111,12 @@
   .btn-outline-accent:hover{background:var(--accent-glow)}
   .btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-  /* TOAST */
   #toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:#1c2128;color:var(--text);padding:10px 22px;border-radius:8px;font-size:.85rem;border:1px solid var(--border);opacity:0;transition:all .3s ease;pointer-events:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.4)}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* DRAG ZONE indicator */
   .drop-indicator{display:none;position:absolute;inset:0;border:2px dashed var(--accent);border-radius:var(--radius);background:rgba(240,136,62,.06);z-index:10;align-items:center;justify-content:center;font-size:1rem;color:var(--accent);font-weight:600;pointer-events:none;backdrop-filter:blur(2px)}
   .drop-indicator.show{display:flex}
 
-  /* RESPONSIVE */
   @media(max-width:500px){
     header{padding:14px 14px 10px}
     header h1{font-size:1.1rem}
@@ -122,8 +133,8 @@
 
 <header>
   <h1><span class="brace">{</span>json<span class="brace">}</span> <span>pretty</span></h1>
-  <span class="badge">v1.0</span>
-  <div class="sub">formatter · validator · tree view</div>
+  <span class="badge">v1.1</span>
+  <div class="sub">formatter · validator · tree view · JSONPath search</div>
 </header>
 
 <div class="app">
@@ -161,6 +172,16 @@
       </div>
       <pre id="output"></pre>
       <div id="error"></div>
+      <!-- JSONPath bar -->
+      <div class="jsonpath-bar" id="jsonpath-bar">
+        <span class="jp-label">JSONPath</span>
+        <span class="jp-path" id="jsonpath-text"></span>
+        <span class="jp-clear" id="jsonpath-clear" title="Clear">&times;</span>
+      </div>
+      <!-- Tree search -->
+      <div class="tree-search-wrap" id="tree-search-wrap">
+        <input type="text" id="tree-search" placeholder="Search tree nodes..." autocomplete="off">
+      </div>
       <div class="tree-wrap" id="tree-wrap"></div>
     </div>
     <div class="toolbar" style="border-top:none;border-top:1px solid var(--border)">
@@ -189,11 +210,17 @@
   const statusTxt = el('status-text');
   const dropInd   = el('drop-indicator');
   const toast     = el('toast');
+  const jsonpathBar = el('jsonpath-bar');
+  const jsonpathText = el('jsonpath-text');
+  const jsonpathClear = el('jsonpath-clear');
+  const treeSearchWrap = el('tree-search-wrap');
+  const treeSearch = el('tree-search');
 
   let treeVisible = false;
   let lastFormatted = '';
+  let treeData = null;
+  let selectedPath = '';
 
-  /* ---- helpers ---- */
   function escapeHtml(s){
     const d = document.createElement('div');
     d.textContent = s;
@@ -263,6 +290,9 @@
     treeVisible = false;
     el('btn-tree').textContent = '\u25B6 Tree';
     lastFormatted = '';
+    treeData = null;
+    jsonpathBar.classList.remove('show');
+    treeSearchWrap.classList.remove('show');
   }
 
   function hideError(){ error.classList.remove('show'); error.innerHTML = ''; }
@@ -280,6 +310,8 @@
       lastFormatted = raw;
     }
     setStatus('Valid JSON', true);
+    jsonpathBar.classList.remove('show');
+    treeSearchWrap.classList.remove('show');
   }
 
   function formatJson(){
@@ -312,6 +344,8 @@
       treeVisible = false;
       el('btn-tree').textContent = '\u25B6 Tree';
       lastFormatted = pretty;
+      jsonpathBar.classList.remove('show');
+      treeSearchWrap.classList.remove('show');
     } catch(e){
       showError(e);
     }
@@ -333,6 +367,10 @@
     treeVisible = false;
     el('btn-tree').textContent = '\u25B6 Tree';
     lastFormatted = '';
+    treeData = null;
+    jsonpathBar.classList.remove('show');
+    treeSearchWrap.classList.remove('show');
+    treeSearch.value = '';
   }
 
   function copyOutput(){
@@ -340,7 +378,6 @@
     navigator.clipboard.writeText(lastFormatted).then(() => {
       showToast('Copied to clipboard');
     }).catch(() => {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = lastFormatted;
       ta.style.position='fixed';ta.style.left='-9999px';
@@ -351,54 +388,68 @@
     });
   }
 
-  /* ---- TREE VIEW ---- */
-  function buildTree(data, indent, isLast){
+  /* ---- JSONPath helpers ---- */
+  function showJsonPath(path){
+    selectedPath = path;
+    jsonpathText.textContent = path;
+    jsonpathBar.classList.add('show');
+  }
+
+  jsonpathClear.addEventListener('click', function(){
+    jsonpathBar.classList.remove('show');
+    selectedPath = '';
+    // remove all path highlights
+    treeWrap.querySelectorAll('.tree-active-path').forEach(el => el.classList.remove('tree-active-path'));
+  });
+
+  /* ---- TREE VIEW with JSONPath ---- */
+  function buildTree(data, path) {
     const lines = [];
     const type = Array.isArray(data) ? 'array' : typeof data;
 
-    if(data === null){ lines.push({html:'<span class="val-null">null</span>', children:[]}); return lines; }
-    if(type === 'string'){ lines.push({html:'<span class="val-string">"'+escapeHtml(data)+'"</span>', children:[]}); return lines; }
-    if(type === 'number'){ lines.push({html:'<span class="val-number">'+data+'</span>', children:[]}); return lines; }
-    if(type === 'boolean'){ lines.push({html:'<span class="val-boolean">'+data+'</span>', children:[]}); return lines; }
+    if(data === null){ lines.push({html:'<span class="val-null">null</span>', children:[], path: path}); return lines; }
+    if(type === 'string'){ lines.push({html:'<span class="val-string">"'+escapeHtml(data)+'"</span>', children:[], path: path}); return lines; }
+    if(type === 'number'){ lines.push({html:'<span class="val-number">'+data+'</span>', children:[], path: path}); return lines; }
+    if(type === 'boolean'){ lines.push({html:'<span class="val-boolean">'+data+'</span>', children:[], path: path}); return lines; }
 
-    // object or array
     const entries = Array.isArray(data) ? data : Object.keys(data);
     const isArr = Array.isArray(data);
     const len = isArr ? data.length : Object.keys(data).length;
 
     if(len === 0){
-      lines.push({html: isArr ? '<span class="json-bracket">[</span><span class="json-bracket">]</span>' : '<span class="json-bracket">{</span><span class="json-bracket">}</span>', children:[]});
+      lines.push({html: isArr ? '<span class="json-bracket">[</span><span class="json-bracket">]</span>' : '<span class="json-bracket">{</span><span class="json-bracket">}</span>', children:[], path: path});
       return lines;
     }
 
-    // opening bracket line
     const openBracket = isArr ? '[' : '{';
     const closeBracket = isArr ? ']' : '}';
-    lines.push({html: '<span class="json-bracket">'+openBracket+'</span>', children:[], isContainer:true});
+    lines.push({html: '<span class="json-bracket">'+openBracket+'</span>', children:[], isContainer:true, path: path});
 
     const children = [];
     if(isArr){
       for(let i=0; i<len; i++){
         const val = data[i];
-        const sub = buildTree(val, indent+1, i===len-1);
-        children.push({key: null, valueLines: sub, trailing: i===len-1 ? '' : ','});
+        const childPath = path + '[' + i + ']';
+        const sub = buildTree(val, childPath);
+        children.push({key: null, keyPath: childPath, valueLines: sub, trailing: i===len-1 ? '' : ','});
       }
     } else {
       const keys = Object.keys(data);
       for(let i=0; i<keys.length; i++){
         const k = keys[i];
         const val = data[k];
-        const sub = buildTree(val, indent+1, i===keys.length-1);
-        children.push({key: k, valueLines: sub, trailing: i===keys.length-1 ? '' : ','});
+        const childPath = path + '.' + k;
+        const sub = buildTree(val, childPath);
+        children.push({key: k, keyPath: childPath, valueLines: sub, trailing: i===keys.length-1 ? '' : ','});
       }
     }
-    lines.push({children, closeBracket, isChildren:true});
-    lines.push({html: '<span class="json-bracket">'+closeBracket+'</span>', children:[], isClose:true});
+    lines.push({children, closeBracket, isChildren:true, path: path});
+    lines.push({html: '<span class="json-bracket">'+closeBracket+'</span>', children:[], isClose:true, path: path});
     return lines;
   }
 
   function renderTreeNode(data, depth){
-    const lines = buildTree(data, 0, true);
+    const lines = buildTree(data, '$');
     const wrap = document.createElement('div');
     wrap.className = 'tree-container';
     renderTreeLines(lines, wrap, 0, true);
@@ -409,14 +460,13 @@
     for(let i=0; i<lines.length; i++){
       const item = lines[i];
       if(item.isChildren){
-        // children block
         const childBlock = document.createElement('div');
         childBlock.className = 'tree-children';
         for(let j=0; j<item.children.length; j++){
           const child = item.children[j];
           const lineDiv = document.createElement('div');
           lineDiv.className = 'tree-line';
-          // indent
+          lineDiv.dataset.jpath = child.keyPath || '';
           for(let d=0; d<depth+1; d++){
             const sp = document.createElement('span');
             sp.className = 'tree-indent' + (d < depth+1 ? ' has' : '');
@@ -428,13 +478,19 @@
             const ks = document.createElement('span');
             ks.className = 'key';
             ks.textContent = '"' + child.key + '"';
+            ks.dataset.jpath = child.keyPath || '';
+            // Click on key shows JSONPath
+            ks.addEventListener('click', function(e){
+              e.stopPropagation();
+              const p = this.dataset.jpath;
+              if(p) showJsonPath(p);
+            });
             kv.appendChild(ks);
             const sep = document.createElement('span');
             sep.className = 'sep';
             sep.textContent = ': ';
             kv.appendChild(sep);
           }
-          // check if value is a single simple leaf
           const vLines = child.valueLines;
           if(vLines.length === 1 && !vLines[0].isContainer && !vLines[0].isChildren && !vLines[0].isClose){
             const vSpan = document.createElement('span');
@@ -447,16 +503,13 @@
               kv.appendChild(tr);
             }
             lineDiv.appendChild(kv);
-            // leaf - toggle invisible
             const tog = document.createElement('span');
             tog.className = 'tree-toggle';
             lineDiv.insertBefore(tog, lineDiv.firstChild);
             childBlock.appendChild(lineDiv);
           } else {
-            // container — make collapsible
             const containerDiv = document.createElement('div');
             containerDiv.className = 'tree-expanded';
-            // top line: toggle + key
             const topLine = document.createElement('div');
             topLine.className = 'tree-line';
             for(let d=0; d<depth+1; d++){
@@ -473,37 +526,36 @@
               const ks = document.createElement('span');
               ks.className = 'key';
               ks.textContent = '"' + child.key + '"';
+              ks.dataset.jpath = child.keyPath || '';
+              ks.addEventListener('click', function(e){
+                e.stopPropagation();
+                const p = this.dataset.jpath;
+                if(p) showJsonPath(p);
+              });
               kv2.appendChild(ks);
               const sep = document.createElement('span');
               sep.className = 'sep';
               sep.textContent = ': ';
               kv2.appendChild(sep);
             }
-            // render opening bracket inside kv for first line
             const firstValLine = vLines[0];
             if(firstValLine && firstValLine.html){
               const vSpan = document.createElement('span');
               vSpan.innerHTML = firstValLine.html;
               kv2.appendChild(vSpan);
             }
-            if(child.trailing && vLines.length <= 2){
-              // if only open + close, trailing goes on same line
-            }
             topLine.appendChild(kv2);
             containerDiv.appendChild(topLine);
 
-            // render children recursively (skip opening line)
             if(vLines.length > 2){
-              // render middle children
               const middleDiv = document.createElement('div');
               middleDiv.className = 'tree-children';
-              const middleItems = vLines.slice(1, -1); // skip open and close
+              const middleItems = vLines.slice(1, -1);
               for(let mi=0; mi<middleItems.length; mi++){
                 const mitem = middleItems[mi];
                 if(mitem.isChildren){
                   renderTreeLines([mitem], middleDiv, depth+2, false);
                 } else {
-                  // single line
                   const subLine = document.createElement('div');
                   subLine.className = 'tree-line';
                   for(let d=0; d<depth+2; d++){
@@ -526,7 +578,6 @@
               containerDiv.appendChild(middleDiv);
             }
 
-            // closing bracket line
             const lastVLine = vLines[vLines.length-1];
             if(lastVLine && lastVLine.html){
               const closeLine = document.createElement('div');
@@ -536,7 +587,6 @@
                 sp.className = 'tree-indent' + (d < depth+1 ? ' has' : '');
                 closeLine.appendChild(sp);
               }
-              // no toggle for close bracket
               const tog3 = document.createElement('span');
               tog3.className = 'tree-toggle';
               tog3.style.visibility = 'hidden';
@@ -554,7 +604,6 @@
         }
         parentEl.appendChild(childBlock);
       } else {
-        // single line
         const lineDiv = document.createElement('div');
         lineDiv.className = 'tree-line';
         if(!isRoot){
@@ -573,7 +622,6 @@
         const kv = document.createElement('span');
         kv.className = 'kv';
         if(item.html) kv.innerHTML = item.html;
-        // trailing comma for container open?
         lineDiv.appendChild(kv);
         parentEl.appendChild(lineDiv);
       }
@@ -598,15 +646,81 @@
     });
   }
 
+  /* ---- Tree search ---- */
+  function filterTree(query){
+    if(!query){
+      treeWrap.querySelectorAll('.tree-hidden').forEach(el => el.classList.remove('tree-hidden'));
+      treeWrap.querySelectorAll('.tree-highlight').forEach(el => {
+        const parent = el.parentNode;
+        while(el.firstChild) parent.insertBefore(el.firstChild, el);
+        parent.removeChild(el);
+      });
+      return;
+    }
+    const q = query.toLowerCase();
+    const allLines = treeWrap.querySelectorAll('.tree-line');
+    allLines.forEach(line => {
+      const text = line.textContent.toLowerCase();
+      const match = text.includes(q);
+      // Check if any ancestor container has a match
+      let hasMatchChild = false;
+      const container = line.closest('[class*="tree-"]');
+      if(container){
+        const descendants = container.querySelectorAll('.tree-line');
+        for(const d of descendants){
+          if(d.textContent.toLowerCase().includes(q)){
+            hasMatchChild = true;
+            break;
+          }
+        }
+      }
+      if(match || hasMatchChild){
+        line.closest('.tree-line') && line.style.display === 'none' ? null : null;
+        // Highlight matching text
+        if(match && q.length > 0){
+          // Remove old highlight wrapper
+          const kv = line.querySelector('.kv');
+          if(kv){
+            const oldHL = kv.querySelector('.tree-highlight');
+            if(oldHL){
+              const parent = oldHL.parentNode;
+              while(oldHL.firstChild) parent.insertBefore(oldHL.firstChild, oldHL);
+              parent.removeChild(oldHL);
+            }
+            // Re-apply highlighting
+            const html = kv.innerHTML;
+            const idx = html.toLowerCase().indexOf(q);
+            if(idx >= 0){
+              const before = html.slice(0, idx);
+              const matchText = html.slice(idx, idx + q.length);
+              const after = html.slice(idx + q.length);
+              kv.innerHTML = before + '<span class="tree-highlight">' + matchText + '</span>' + after;
+            }
+          }
+        }
+        line.classList.remove('tree-hidden');
+      } else {
+        line.classList.add('tree-hidden');
+      }
+    });
+  }
+
+  treeSearch.addEventListener('input', function(){
+    filterTree(this.value);
+  });
+
+  /* ---- Toggle tree ---- */
   function toggleTree(){
     if(treeVisible){
       treeWrap.classList.remove('show');
       treeWrap.innerHTML = '';
       treeVisible = false;
       el('btn-tree').textContent = '\u25B6 Tree';
+      jsonpathBar.classList.remove('show');
+      treeSearchWrap.classList.remove('show');
+      treeSearch.value = '';
       return;
     }
-    // need parsed data
     let raw = input.value.trim();
     if(!raw && lastFormatted){
       raw = lastFormatted;
@@ -621,6 +735,7 @@
     ph.classList.add('hide');
     output.classList.remove('show');
     treeWrap.innerHTML = '';
+    treeData = parsed;
     const treeEl = renderTreeNode(parsed, 0);
     treeWrap.appendChild(treeEl);
     treeWrap.classList.add('show');
@@ -628,6 +743,9 @@
     el('btn-tree').textContent = '\u25BC Tree';
     outputCnt.textContent = '';
     setStatus('Tree view', true);
+    // Show search bar
+    treeSearchWrap.classList.add('show');
+    treeSearch.focus();
   }
 
   /* ---- drag & drop ---- */
