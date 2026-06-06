@@ -12,7 +12,7 @@
 
 A **polished, single-file** JSON formatter, validator, and tree-view explorer — all in one HTML page. No build step, no dependencies, deploy anywhere.
 
-**[→ Live Demo](https://your-username.github.io/json-pretty)** (replace with your GitHub Pages URL)
+**[→ Live Demo](https://soumendrak.github.io/json-pretty)**
 
 ---
 
